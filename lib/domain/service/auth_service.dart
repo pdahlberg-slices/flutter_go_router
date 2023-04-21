@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AuthService {
 
   final TimeService timeService;
+  bool _loggedIn = false;
 
   AuthService(this.timeService);
 
@@ -14,7 +15,11 @@ class AuthService {
   );
 
   bool isLoggedIn() {
-    return false;
+    return _loggedIn;
+  }
+
+  Future<void> login() async {
+    _loggedIn = true;
   }
 
 }

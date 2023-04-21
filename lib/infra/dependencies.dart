@@ -1,4 +1,5 @@
 
+import 'package:admin/domain/bloc/auth_bloc.dart';
 import 'package:admin/domain/bloc/item_details_bloc.dart';
 import 'package:admin/domain/bloc/item_list_bloc.dart';
 import 'package:admin/domain/bloc/item_list_events.dart';
@@ -14,7 +15,7 @@ class Dependencies {
 
   static List<RepositoryProvider> common() => [
     RepositoryProvider<TimeService>(create: (_) => TimeService()),
-    RepositoryProvider<AuthService>(create: (context) => AuthService.of(context)),
+    RepositoryProvider<AuthService>(create: AuthService.of),
     RepositoryProvider<ItemRepository>(create: (context) {
       final repository = ItemRepository.of(context);
 
@@ -32,6 +33,7 @@ class Dependencies {
       ..add(ItemListRefreshed())
     ),
     const BlocProvider<ItemDetailsBloc>(create: ItemDetailsBloc.of),
+    const BlocProvider<AuthBloc>(create: AuthBloc.of),
   ];
 
   static List<RepositoryProvider> prod() => [
