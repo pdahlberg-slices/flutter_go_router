@@ -1,16 +1,18 @@
+import 'package:admin/domain/service/auth_service.dart';
 import 'package:admin/domain/service/time_service.dart';
 import 'package:admin/domain/view/item_details_page.dart';
 import 'package:admin/domain/view/item_list_page.dart';
+import 'package:admin/domain/view/login_page.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
 
-  final TimeService timeService;
+  final AuthService authService;
   GoRouter get router => _goRouter;
 
-  AppRouter(this.timeService);
+  AppRouter(this.authService);
 
   AppRouter.of(BuildContext context) : this(
     context.read(),
@@ -25,7 +27,23 @@ class AppRouter {
         builder: (BuildContext context, GoRouterState state) {
           return const ItemListPage();
         },
+        redirect: (BuildContext context, GoRouterState state) {
+          debugPrint('redirect');
+          if(authService.isLoggedIn()) {
+            debugPrint('redirect: no');
+            return null;
+          } else {
+            debugPrint('redirect: login');
+            return '/login';
+          }
+        },
         routes: <RouteBase>[
+          GoRoute(
+            path: 'login',
+            builder: (BuildContext context, GoRouterState state) {
+              return const LoginPage();
+            },
+          ),
           GoRoute(
             path: 'details',
             name: 'details',
