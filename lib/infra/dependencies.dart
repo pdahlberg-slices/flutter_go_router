@@ -25,7 +25,7 @@ class Dependencies {
 
       return repository;
     }),
-    RepositoryProvider<AppRouter>(create: (context) => AppRouter.of(context))
+    RepositoryProvider<AppRouter>(create: (context) => AppRouter.of(context)),
   ];
 
   static List<BlocProvider> blocs() => [

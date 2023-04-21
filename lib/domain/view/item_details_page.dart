@@ -9,6 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ItemDetailsPage extends StatelessWidget {
 
+  static const String label = 'Item Details';
+  static const String path = 'details';
   final int id;
 
   const ItemDetailsPage({
